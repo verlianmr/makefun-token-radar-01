@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar: pre-token protocols ranked by fitted implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>TOKEN RADAR</h1>
+    <p class="tag">Pre-token protocols ranked by an implied value fitted, at run time, on the tokens that already trade.</p>
+  </div>
+  <div class="strip" id="strip"></div>
+</header>
+<main>
+  <section class="panel" id="modelPanel"></section>
+  <section class="controls" id="controls">
+    <input id="q" type="search" placeholder="Search name or slug">
+    <select id="fClass">
+      <option value="">All board rows</option>
+      <option value="watchlist">Watchlist (above the $50M floor)</option>
+      <option value="candidate">Below the floor (the radar's finds)</option>
+    </select>
+    <select id="fVerdict">
+      <option value="">Any verdict</option>
+      <option value="FARM">FARM</option>
+      <option value="THIN">THIN</option>
+      <option value="SKIP">SKIP</option>
+    </select>
+    <select id="fCat"><option value="">Any category</option></select>
+    <select id="fSort">
+      <option value="rank">Sort: implied value</option>
+      <option value="odds">Sort: token odds</option>
+      <option value="tvl">Sort: TVL</option>
+      <option value="growth">Sort: 7d growth</option>
+      <option value="ev">Sort: farm expected value</option>
+    </select>
+    <span class="count" id="rowCount"></span>
+  </section>
+  <section class="boardWrap">
+    <table class="board" id="board">
+      <thead><tr>
+        <th>#</th><th>Protocol</th><th>Class</th><th>TVL</th><th>7d</th>
+        <th>Implied value</th><th>Rank range</th><th>Token odds</th><th>Verdict</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </section>
+  <section class="detail" id="detail"></section>
+  <section class="panel" id="livePanel"></section>
+  <section class="panel" id="asidePanel"></section>
+  <footer>
+    <p>Method: the implied value of every row comes from one regression fitted on the snapshot's own traded
+    tokens when this page's program ran; token odds are the traded share of each protocol's age-and-size
+    bucket among all 758 protocols. Farm verdicts assume a launch gives 5% of implied value to early users
+    and one active wallet earns 0.1% of that pool. A board's implied value is this entry's own claim.</p>
+  </footer>
+</main>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
